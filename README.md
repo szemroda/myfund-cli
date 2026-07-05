@@ -49,6 +49,7 @@ myfund portfolios set-default "Portfolio in total"
 Query the default portfolio:
 
 ```bash
+myfund capabilities
 myfund summary
 myfund positions --sort value --limit 10
 myfund history --metric value --period 90d --interval weekly
@@ -102,6 +103,7 @@ myfund config unset default-portfolio
 ### Portfolio Data
 
 ```bash
+myfund capabilities
 myfund summary [--portfolio <name>]
 myfund performance [--portfolio <name>]
 myfund positions [--portfolio <name>] [--sort value|weight|profit|return|daily-change] [--limit <n>] [--type <type>] [--source-portfolio <name>]
@@ -137,6 +139,8 @@ myfund config unset default-portfolio
 ## Output Contract
 
 Successful commands write minified JSON to stdout.
+
+`myfund capabilities` returns an agent-facing JSON catalog of commands, when to use each command, important options, output shapes, and examples. Agents should call it first when the right command is unclear.
 
 Example success shape:
 

@@ -125,6 +125,30 @@ function parseLine(value: string): unknown {
 }
 
 describe("cli", () => {
+  it("prints agent-facing capabilities without config or API access", async () => {
+    const result = await runCommand(["capabilities"]);
+    const capabilities = parseLine(result.stdout);
+
+    expect(result.code).toBe(0);
+    expect(result.stderr).toBe("");
+    expect(result.apiCalls).toEqual([]);
+    expect(capabilities).toMatchObject({
+      cli: "myfund",
+      outputFormat: "minified-json",
+      commandSelection: expect.arrayContaining([
+        expect.objectContaining({
+          command: "summary",
+          useWhen: expect.stringContaining("compact overview"),
+          requiresApi: true,
+        }),
+        expect.objectContaining({
+          command: "capabilities",
+          requiresApi: false,
+        }),
+      ]),
+    });
+  });
+
   it("prints normalized summary as minified JSON and resolves auth/portfolio", async () => {
     const result = await runCommand(["summary"]);
 

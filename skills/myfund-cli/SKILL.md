@@ -17,6 +17,7 @@ metadata:
 # myFund CLI
 
 - Use `myfund` for myFund portfolio queries instead of calling the myFund API directly.
+- Run `myfund capabilities` first when unsure which command answers the user's question.
 - Prefer focused commands (`summary`, `performance`, `positions`, `position`, `allocation`, `history`) over `raw-response`.
 - Use `raw-response` only when the user explicitly needs the full API payload; it can be large.
 - Use `history` only with an explicit metric and bounded range/options when possible.
@@ -24,6 +25,7 @@ metadata:
 ## Useful Commands
 
 ```bash
+myfund capabilities
 myfund summary [--portfolio <name>]
 myfund performance [--portfolio <name>]
 myfund positions [--portfolio <name>] [--sort value|weight|profit|return|daily-change] [--limit <n>] [--type <type>] [--source-portfolio <name>]

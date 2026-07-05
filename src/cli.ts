@@ -2,6 +2,7 @@
 import { pathToFileURL } from "node:url";
 import { Command, CommanderError } from "commander";
 import { getPortfolio } from "./lib/api-client.js";
+import { getCapabilities } from "./lib/capabilities.js";
 import { getSafeConfigInfo, readConfig, writeConfig } from "./lib/config.js";
 import { MyfundCliError, isMyfundCliError } from "./lib/errors.js";
 import { selectHistory, type HistoryOptions } from "./lib/history.js";
@@ -95,6 +96,10 @@ export function createProgram(deps: CliDeps = {}): Command {
       writeOut: (value) => context.stdout.write(value),
       writeErr: (value) => context.stderr.write(value),
     });
+
+  program.command("capabilities").action(() => {
+    writeJson(getCapabilities(), context.stdout);
+  });
 
   program
     .command("summary")
