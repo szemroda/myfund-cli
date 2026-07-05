@@ -17,8 +17,6 @@ metadata:
 # myFund CLI
 
 - Use `myfund` for myFund portfolio queries instead of calling the myFund API directly.
-- All command output is minified JSON. Parse stdout as JSON for successful commands.
-- Errors are minified JSON on stderr and use non-zero exit codes.
 - Prefer focused commands (`summary`, `performance`, `positions`, `position`, `allocation`, `history`) over `raw-response`.
 - Use `raw-response` only when the user explicitly needs the full API payload; it can be large.
 - Use `history` only with an explicit metric and bounded range/options when possible.
