@@ -15,6 +15,12 @@ npm ci
 npm run build
 ```
 
+After the package is published:
+
+```bash
+npm install -g myfund-cli
+```
+
 Run locally:
 
 ```bash
@@ -105,3 +111,19 @@ npm run verify
 ```
 
 The package supports Node.js 20+. Dependencies intentionally avoid packages that require newer Node versions.
+
+## Skill Install
+
+The repository includes a Codex/skills.sh skill at `skills/myfund-cli`.
+
+Install it from GitHub:
+
+```bash
+npx skills add https://github.com/szemroda/myfund-cli --skill myfund-cli
+```
+
+Preview the skill prompt without installing:
+
+```bash
+npx skills use https://github.com/szemroda/myfund-cli --skill myfund-cli
+```

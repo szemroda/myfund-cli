@@ -3,12 +3,16 @@
   "version": "0.0.1",
   "description": "Agent-first JSON CLI for querying myFund portfolio data.",
   "license": "MIT",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=20"
   },
   "files": [
-    "dist"
+    "dist",
+    "skills",
+    "README.md"
   ],
   "type": "module",
   "bin": {
