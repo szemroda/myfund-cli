@@ -28,9 +28,9 @@ Install from npm after the package is published:
 npm install -g myfund-cli
 ```
 
-## Codex Skill
+## Agent Skill
 
-This repository includes a Codex skill at `skills/myfund-cli` for agents that should prefer the CLI over direct myFund API calls.
+This repository includes a Agent skill at `skills/myfund-cli` for agents that should prefer the CLI over direct myFund API calls.
 
 ```bash
 npx skills add https://github.com/szemroda/myfund-cli --skill myfund-cli
@@ -145,7 +145,11 @@ Successful commands write minified JSON to stdout.
 Example success shape:
 
 ```json
-{"portfolio":"Portfolio in total","value":12345.67,"periodReturns":{"1m":1.23,"ytd":4.56}}
+{
+  "portfolio": "Portfolio in total",
+  "value": 12345.67,
+  "periodReturns": { "1m": 1.23, "ytd": 4.56 }
+}
 ```
 
 Errors write minified JSON to stderr and return a non-zero exit code.
@@ -153,7 +157,12 @@ Errors write minified JSON to stderr and return a non-zero exit code.
 Example error shape:
 
 ```json
-{"error":{"code":"MISSING_PORTFOLIO","message":"Missing portfolio. Pass --portfolio or configure defaultPortfolio."}}
+{
+  "error": {
+    "code": "MISSING_PORTFOLIO",
+    "message": "Missing portfolio. Pass --portfolio or configure defaultPortfolio."
+  }
+}
 ```
 
 Common error codes include:
