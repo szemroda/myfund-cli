@@ -1,7 +1,7 @@
 {
   "name": "myfund-cli",
   "version": "0.1.0",
-  "description": "Agent-first JSON CLI for querying myFund portfolio data.",
+  "description": "Agent-first CLI for querying myFund portfolio data.",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

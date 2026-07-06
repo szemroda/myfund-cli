@@ -1,6 +1,6 @@
 ---
 name: myfund-cli
-description: Query myFund portfolio data through the myfund JSON CLI. Use when agents need portfolio summaries, performance, positions, allocation, bounded history, local myFund CLI config, or raw myFund API escape-hatch access without handling API details directly.
+description: Query myFund portfolio data through the myfund CLI. Use when agents need portfolio summaries, performance, positions, allocation, bounded history, local myFund CLI config, or raw myFund API escape-hatch access without handling API details directly.
 metadata:
   openclaw:
     requires:
@@ -16,8 +16,8 @@ metadata:
 
 # myFund CLI
 
-- Use `myfund` for myFund portfolio queries instead of calling the myFund API directly.
-- Run `myfund capabilities` first when unsure which command answers the user's question.
+- Use `myfund` CLI for myFund portfolio queries instead of calling the myFund API directly.
+- Run `myfund capabilities` first when unsure which command to run.
 - Prefer focused commands (`summary`, `performance`, `positions`, `position`, `allocation`, `history`) over `raw-response`.
 - Use `raw-response` only when the user explicitly needs the full API payload; it can be large.
 - Use `history` only with an explicit metric and bounded range/options when possible.
@@ -37,9 +37,7 @@ myfund history --metric value|profit|contribution|benchmark|return [--portfolio 
 ## Config
 
 - Config path: `~/.config/myfund-cli/config.json`.
-- API key priority: config `apiKey`, then `MYFUND_API_KEY`.
 - Portfolio priority: command `--portfolio`, then config `defaultPortfolio`.
-- `myfund config get` never prints the API key.
 
 Useful setup and inspection:
 
