@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { pathToFileURL } from "node:url";
+import { realpathSync } from "node:fs";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { Command, CommanderError } from "commander";
 import { getPortfolio } from "./lib/api-client.js";
 import { getCapabilities } from "./lib/capabilities.js";
@@ -453,7 +454,19 @@ function toCliError(error: unknown): MyfundCliError {
   });
 }
 
-if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) {
+export function isMainModule(moduleUrl: string, entryPath: string | undefined): boolean {
+  if (entryPath === undefined) {
+    return false;
+  }
+
+  try {
+    return realpathSync(fileURLToPath(moduleUrl)) === realpathSync(entryPath);
+  } catch {
+    return moduleUrl === pathToFileURL(entryPath).href;
+  }
+}
+
+if (isMainModule(import.meta.url, process.argv[1])) {
   const exitCode = await runCli();
   process.exitCode = exitCode;
 }

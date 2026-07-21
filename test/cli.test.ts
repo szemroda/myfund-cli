@@ -1,6 +1,10 @@
+import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import { Writable } from "node:stream";
+import { pathToFileURL } from "node:url";
 import { describe, expect, it } from "vitest";
-import { runCli, type CliDeps } from "../src/cli.js";
+import { isMainModule, runCli, type CliDeps } from "../src/cli.js";
 import type { ConfigReadResult, MyfundApiResponse, MyfundConfig } from "../src/types.js";
 
 class MemoryWritable extends Writable {
@@ -125,6 +129,21 @@ function parseLine(value: string): unknown {
 }
 
 describe("cli", () => {
+  it("recognizes the entry module through an installed package symlink", async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), "myfund-cli-"));
+    const realEntry = path.join(directory, "cli.js");
+    const linkedEntry = path.join(directory, "installed-cli.js");
+
+    try {
+      await writeFile(realEntry, "");
+      await symlink(realEntry, linkedEntry);
+
+      expect(isMainModule(pathToFileURL(realEntry).href, linkedEntry)).toBe(true);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+
   it("prints agent-facing capabilities without config or API access", async () => {
     const result = await runCommand(["capabilities"]);
     const capabilities = parseLine(result.stdout);
